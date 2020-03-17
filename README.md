@@ -6,6 +6,8 @@ This addon lets anyone make you follow them when they whisper you "!follow". Thi
 
 Only the person that is going to follow needs to have this addon installed, not the one whispering.
 
+&nbsp;
+
 ### Commands (write them in chat):
 
 /fmp -- Shows all commands
