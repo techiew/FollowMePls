@@ -61,7 +61,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 		if arg1 == "FollowMePls" then
 			print("* FollowMePls loaded.")
 			print("* Type /fmp to see commands")
-			print("* Source: Github")
+			print("* Source: github.com/techiew/FollowMePls")
 			
 			if FMP_ENABLED == nil then
 				FMP_ENABLED = 1
@@ -85,7 +85,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 		name = string.sub(name, 0, j - 1)
 		
 		if FMP_ENABLED == 0 then 
-			print("Can't auto follow, FollowMePls is disabled.")
+			print("Can't auto-follow, FollowMePls is disabled.")
 			return 
 		end
 		
@@ -96,7 +96,7 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			print("Now following " .. name .. ".")
 			FollowUnit(name)
 		else
-			print("Can't auto follow " .. name .. ", not in party or raid.")
+			print("Can't auto-follow " .. name .. ", not in party or raid.")
 		end
 		
 	end
