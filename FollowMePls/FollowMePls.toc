@@ -3,7 +3,7 @@
 ## Notes: Automatically follow anyone who whispers you "!follow".
 ## Author: Techie
 ## Version: 1.0
-## SavedVariablesPerCharacter: FMP_ENABLED, FMP_PARTY_ONLY
+## SavedVariablesPerCharacter: FMP_ENABLED, FMP_PARTY_ONLY, FMP_MSG
 
 FollowMePls.lua
 

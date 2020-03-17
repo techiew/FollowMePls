@@ -18,6 +18,11 @@ SlashCmdList["FMP"] = function(msg)
 		return
 	end
 	
+	if msg == "msg" then
+		print("msg: " .. FMP_MSG)
+		return
+	end
+	
 	if msg == "enabled 1" then
 		print("FollowMePls enabled.")
 		FMP_ENABLED = 1
@@ -42,9 +47,22 @@ SlashCmdList["FMP"] = function(msg)
 		return
 	end
 	
+	if msg == "msg 1" then
+		print("The login message will show.")
+		FMP_MSG = 1
+		return
+	end
+	
+	if msg == "msg 0" then
+		print("The login message will not show anymore.")
+		FMP_MSG = 0
+		return
+	end
+	
 	print("* FollowMePls Commands:")
-	print("* /fmp enabled 1/0 (1 to enable and 0 to disable)")
-	print("* /fmp partyonly 1/0 (1 to only accept follow commands from party and raid members, 0 to accept from anybody)")
+	print("* /fmp enabled 1/0 - 1 to enable and 0 to disable the addon")
+	print("* /fmp partyonly 1/0 - 1 to only accept follow commands from party and raid members, 0 to accept from anybody")
+	print("* /fmp msg 1/0 - 1 to show the login message, 0 to not show")
 end
 
 -- Set up our frame
@@ -59,9 +77,6 @@ frame:SetScript("OnEvent", function(self, event, ...)
 		local arg1 = ...
 		
 		if arg1 == "FollowMePls" then
-			print("* FollowMePls loaded.")
-			print("* Type /fmp to see commands")
-			print("* Source: github.com/techiew/FollowMePls")
 			
 			if FMP_ENABLED == nil then
 				FMP_ENABLED = 1
@@ -69,6 +84,16 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			
 			if FMP_PARTY_ONLY == nil then
 				FMP_PARTY_ONLY = 1
+			end
+			
+			if FMP_MSG == nil then
+				FMP_MSG = 1
+			end
+			
+			if FMP_MSG == 1 then
+				print("* FollowMePls loaded.")
+				print("* Type /fmp to see commands.")
+				print("* Source: github.com/techiew/FollowMePls")
 			end
 			
 			loaded = true
