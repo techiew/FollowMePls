@@ -27,4 +27,4 @@ You can download the addon from these sites:
 
 ## Development
 
-Do whatever you want.
+Do whatever you want. But give credit pls.
