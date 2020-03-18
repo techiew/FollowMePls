@@ -8,9 +8,13 @@ This addon lets anyone make you follow them when they whisper you "**!follow**".
 
 Only the person that is going to follow needs to have this addon installed, not the one whispering.
 
-&nbsp;
+## Download
+You can download the addon from these sites:
+[wowinterface.com](https://www.wowinterface.com/downloads/info25521-FollowMePls-Auto-followaddon.html)
+[curseforge.com](https://www.curseforge.com/wow/addons/followmepls-auto-follow-addon)
+[warcrafttavern.com](https://www.warcrafttavern.com/addons/followmepls)
 
-### Commands (write them in chat):
+## Commands (write them in chat):
 
 /fmp - Shows all commands
 
