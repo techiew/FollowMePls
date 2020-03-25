@@ -10,6 +10,7 @@ Only the person that is going to follow needs to have this addon installed, not 
 
 ## Download
 You can download the addon from these sites:
+
 [curseforge.com](https://www.curseforge.com/wow/addons/followmepls-auto-follow-addon)
 
 [wowinterface.com](https://www.wowinterface.com/downloads/info25521-FollowMePls-Auto-followaddon.html)
