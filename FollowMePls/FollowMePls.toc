@@ -7,4 +7,5 @@
 
 FollowMePls.lua
 
-# Source: https://github.com/techiew/FollowMePls
+# Github: https://github.com/techiew/FollowMePls
+
