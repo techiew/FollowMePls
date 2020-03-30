@@ -2,7 +2,7 @@
 
 ![Preview of FollowMePls](https://github.com/techiew/FollowMePls/blob/master/preview.png)
 
-This addon was made for **World of Warcraft Classic,** but it should work for retail too.  
+**This addon was made with WoW Classic in mind, but it works for retail too.**
 
 This addon lets group members make you follow them when they whisper you "**!follow**". This is useful when you have a friend that routinely goes AFK, or if your friend loses his follow after he got stuck. By default, only party and raid members can make you follow them, you can change this with a command.
 
