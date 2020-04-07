@@ -68,6 +68,7 @@ end
 -- Set up our frame
 local frame = CreateFrame("Frame", "FollowMePlsFrame")
 frame:RegisterEvent("CHAT_MSG_WHISPER")
+frame:RegisterEvent("CHAT_MSG_PARTY")
 frame:RegisterEvent("ADDON_LOADED")
 
 -- Handle events
@@ -104,27 +105,33 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			
 	local text, playerName = ...
 	
-	if event == "CHAT_MSG_WHISPER" and text == "!follow" then
-		local name = playerName
-		local i, j = string.find(name, '-')
-		name = string.sub(name, 0, j - 1)
-		
-		if FMP_ENABLED == 0 then 
-			print("Can't auto-follow, FollowMePls is disabled.")
-			return 
-		end
-		
-		if FMP_PARTY_ONLY == 0 then
-			print("Now following " .. name .. ".")
-			FollowUnit(name)
-		elseif UnitInParty(name) or UnitInRaid(name) ~= nil then 
-			FollowUnit(name)
-			print("Now following " .. name .. ".")
-			if FMP_MSG == 1 then
-				SendChatMessage("Now following you", "WHISPER", nil, name)
+	if event == "CHAT_MSG_WHISPER" or event == "CHAT_MSG_PARTY" then
+		if text == "!follow" or text == "!Follow" then
+			local name = playerName
+			local i, j = string.find(name, '-')
+			name = string.sub(name, 0, j - 1)
+			
+			if FMP_ENABLED == 0 then 
+				print("Can't auto-follow, FollowMePls is disabled.")
+				return 
 			end
-		else
-			print("Can't auto-follow " .. name .. ", not in party or raid.")
+			
+			if FMP_PARTY_ONLY == 0 then
+				print("Now following " .. name .. ".")
+				FollowUnit(name)
+			elseif UnitInParty(name) or UnitInRaid(name) ~= nil then 
+				print("Now following " .. name .. ".")
+				FollowUnit(name)
+				if FMP_MSG == 1 then
+					if event == "CHAT_MSG_WHISPER" then
+						SendChatMessage("Now following you", "WHISPER", nil, name)
+					elseif event == "CHAT_MSG_PARTY" then
+						SendChatMessage("Now following " .. name .. ".", "PARTY", nil, name)
+					end
+				end
+			else
+				print("Can't auto-follow " .. name .. ", not in party or raid.")
+			end
 		end
 		
 	end
