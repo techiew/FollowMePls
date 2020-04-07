@@ -104,24 +104,26 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			
 	local text, playerName = ...
 	
-	if event == "CHAT_MSG_WHISPER" and text == "!follow" then
-		local name = playerName
-		local i, j = string.find(name, '-')
-		name = string.sub(name, 0, j - 1)
-		
-		if FMP_ENABLED == 0 then 
-			print("Can't auto-follow, FollowMePls is disabled.")
-			return 
-		end
-		
-		if FMP_PARTY_ONLY == 0 then
-			print("Now following " .. name .. ".")
-			FollowUnit(name)
-		elseif UnitInParty(name) or UnitInRaid(name) ~= nil then 
-			print("Now following " .. name .. ".")
-			FollowUnit(name)
-		else
-			print("Can't auto-follow " .. name .. ", not in party or raid.")
+	if event == "CHAT_MSG_WHISPER" then 
+		if text == "!follow" or text == "!Follow" then
+			local name = playerName
+			local i, j = string.find(name, '-')
+			name = string.sub(name, 0, j - 1)
+			
+			if FMP_ENABLED == 0 then 
+				print("Can't auto-follow, FollowMePls is disabled.")
+				return 
+			end
+			
+			if FMP_PARTY_ONLY == 0 then
+				print("Now following " .. name .. ".")
+				FollowUnit(name)
+			elseif UnitInParty(name) or UnitInRaid(name) ~= nil then 
+				print("Now following " .. name .. ".")
+				FollowUnit(name)
+			else
+				print("Can't auto-follow " .. name .. ", not in party or raid.")
+			end
 		end
 		
 	end
