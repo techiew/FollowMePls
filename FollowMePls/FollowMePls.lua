@@ -118,8 +118,11 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			print("Now following " .. name .. ".")
 			FollowUnit(name)
 		elseif UnitInParty(name) or UnitInRaid(name) ~= nil then 
-			print("Now following " .. name .. ".")
 			FollowUnit(name)
+			print("Now following " .. name .. ".")
+			if FMP_MSG == 1 then
+				SendChatMessage("Now following you", "WHISPER", nil, name)
+			end
 		else
 			print("Can't auto-follow " .. name .. ", not in party or raid.")
 		end
