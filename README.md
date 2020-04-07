@@ -28,6 +28,7 @@ You can download the addon from these sites:
 ## Contributions
 
 Feel free to provide suggestions, code or pull requests.
+- Thanks very much to **rcouch00** for his ongoing interest and multiple pull requests.
 
 ## More addons
 You can find more of my addons in this repo: https://github.com/techiew/WoW-Addons
