@@ -17,14 +17,6 @@ You can download the addon from these sites:
 
 [warcrafttavern.com](https://www.warcrafttavern.com/addons/followmepls)
 
-## Commands (write them in chat):
-
-/fmp - Shows all commands
-
-/fmp enabled 1/0 - 1 to enable the addon, 0 to disable.
-
-/fmp partyonly 1/0 - 1 to only let party and raid members make you follow them, 0 to let **anyone** make you follow them. This is set to 1 by default.
-
 ## Contributions
 
 Feel free to provide suggestions, code or pull requests.
