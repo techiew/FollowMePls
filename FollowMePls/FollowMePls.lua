@@ -224,6 +224,7 @@ end
 -- Set up our frame
 local frame = CreateFrame("Frame", "FollowMePlsFrame")
 frame:RegisterEvent("CHAT_MSG_WHISPER")
+frame:RegisterEvent("CHAT_MSG_PARTY")
 frame:RegisterEvent("ADDON_LOADED")
 
 -- Handle events

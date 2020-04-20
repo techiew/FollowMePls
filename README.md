@@ -2,7 +2,7 @@
 
 ![Preview of FollowMePls](https://github.com/techiew/FollowMePls/blob/master/preview.png)
 
-This addon was made for **World of Warcraft Classic,** but it should work for retail too.  
+**Works for Classic and retail!**
 
 This addon lets group members make you follow them when they whisper you "**!follow**". This is useful when you have a friend that routinely goes AFK, or if your friend loses his follow after he got stuck. By default, only party and raid members can make you follow them, you can change this with a command.
 
@@ -17,10 +17,11 @@ You can download the addon from these sites:
 
 [warcrafttavern.com](https://www.warcrafttavern.com/addons/followmepls)
 
-## Commands (write them in chat):
+## Contributions
 
-/fmp - Shows all commands
+Feel free to provide suggestions, code or pull requests.
+- Thanks very much to **rcouch00** for his ongoing interest and multiple pull requests.
+- Thanks to **Wolfyo_** for his suggestion on adding the !mount, !dismount and vendor/transmog mounting features.
 
-/fmp enabled 1/0 - 1 to enable the addon, 0 to disable.
-
-/fmp partyonly 1/0 - 1 to only let party and raid members make you follow them, 0 to let **anyone** make you follow them. This is set to 1 by default.
+## More addons
+You can find more of my addons in this repo: https://github.com/techiew/WoW-Addons
