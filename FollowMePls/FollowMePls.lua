@@ -221,10 +221,93 @@ local function CheckGroupState(playerName)
 	return true
 end
 
+local function PerformCommand(cmd, playerName)
+	local commands = {
+		"!follow", "!f", "!mount", "!m",
+		"!waterwalk", "!yak", "!mammoth",
+		"!bruto", "!dismount"
+	}
+	
+	local cmdExists = false
+	
+	for key, value in pairs(commands) do
+
+		if cmd == value then 
+			cmdExists = true
+			break
+		end
+		
+	end
+	
+	if not cmdExists then return end
+	
+	if FMP_ENABLED == 0 then 
+		print("Can't do that, FollowMePls is disabled.")
+		return 
+	end
+	
+	-- Removes realm name from player name
+	local name = playerName
+	local i, j = string.find(name, '-')
+	
+	if i ~= nil then
+		name = string.sub(name, 0, j - 1)
+	end
+	
+	if FMP_GROUP_ONLY == 1 then
+	
+		if UnitInParty(name) == false and UnitInRaid(name) == nil then
+			print("Can't do that, " .. name .. " is not in your party or raid.")
+			return false
+		end
+		
+	end
+	
+	if cmd == "!follow" or cmd == "!f" then
+		FollowUnit(name)
+		print("Now following " .. name .. ".")
+	end
+	
+	if cmd == "!mount" or cmd == "!m" then	
+		SummonMount(AUTO)
+	end
+	
+	if cmd == "!waterwalk" then
+		SummonMount(WATERWALK)
+	end
+	
+	if cmd == "!yak" then		
+		SummonMount(YAK)
+	end
+	
+	if cmd == "!mammoth" then
+		SummonMount(MAMMOTH)
+	end
+	
+	if cmd == "!bruto" then
+		SummonMount(BRUTO)
+	end
+	
+	if cmd == "!dismount" then
+		
+		if isClassic then
+			print("This command only works in retail.")
+			return
+		end
+	
+		if IsFlying() then return end
+	
+		if IsMounted() then 
+			Dismount()
+		end
+		
+	end
+	
+end
+
 -- Set up our frame
 local frame = CreateFrame("Frame", "FollowMePlsFrame")
 frame:RegisterEvent("CHAT_MSG_WHISPER")
-frame:RegisterEvent("CHAT_MSG_PARTY")
 frame:RegisterEvent("ADDON_LOADED")
 
 -- Handle events
@@ -259,66 +342,8 @@ frame:SetScript("OnEvent", function(self, event, ...)
 			
 	if event == "CHAT_MSG_WHISPER" then
 		local text, playerName = ...
-	
 		text = string.lower(text)
-		
-		-- Removes realm name from player name
-		local name = playerName
-		local i, j = string.find(name, '-')
-		name = string.sub(name, 0, j - 1)
-	
-		if FMP_ENABLED == 0 then 
-			print("Can't do that, FollowMePls is disabled.")
-			return 
-		end
-	
-		if text == "!follow" or text == "!f" then
-			if CheckGroupState(name) == false then return end
-			FollowUnit(name)
-			print("Now following " .. name .. ".")
-		end
-		
-		if text == "!mount" or text == "!m" then	
-			if CheckGroupState(name) == false then return end
-			SummonMount(AUTO)
-		end
-		
-		if text == "!waterwalk" then
-			if CheckGroupState(name) == false then return end
-			SummonMount(WATERWALK)
-		end
-		
-		if text == "!yak" then		
-			if CheckGroupState(name) == false then return end
-			SummonMount(YAK)
-		end
-		
-		if text == "!mammoth" then
-			if CheckGroupState(name) == false then return end
-			SummonMount(MAMMOTH)
-		end
-		
-		if text == "!bruto" then
-			if CheckGroupState(name) == false then return end
-			SummonMount(BRUTO)
-		end
-		
-		if text == "!dismount" then
-			if CheckGroupState(name) == false then return end
-			
-			if isClassic then
-				print("This command only works in retail.")
-				return
-			end
-		
-			if IsFlying() then return end
-		
-			if IsMounted() then 
-				Dismount()
-			end
-			
-		end
-		
+		PerformCommand(text, playerName)
 	end
 	
 end)
