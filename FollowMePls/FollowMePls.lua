@@ -161,21 +161,21 @@ local function SummonMount(mountType)
 			
 			elseif mountType == YAK then
 				
-				if creatureName == "Grand Expedition Yak" then
+				if spellID == 122708 then -- Grand Expedition Yak
 					selectedMount = key
 					break
 				end
 				
 			elseif mountType == MAMMOTH then
 			
-				if creatureName == "Traveler's Tundra Mammoth" then
+				if spellID == 61447 then -- Traveler's Tundra Mammoth
 					selectedMount = key
 					break
 				end
 			
 			elseif mountType == BRUTO then
 				
-				if creatureName == "Mighty Caravan Brutosaur" then
+				if spellID == 264058 then -- Mighty Caravan Brutosaur
 					selectedMount = key
 					break
 				end
@@ -205,20 +205,6 @@ local function SummonMount(mountType)
 		return true
 	end
 	
-end
-
-local function CheckGroupState(playerName)
-
-	if FMP_GROUP_ONLY == 1 then
-	
-		if UnitInParty(playerName) == false and UnitInRaid(playerName) == nil then
-			print("Can't do that, " .. playerName .. " is not in your party or raid.")
-			return false
-		end
-		
-	end
-
-	return true
 end
 
 local function PerformCommand(cmd, playerName)
