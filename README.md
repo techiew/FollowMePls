@@ -18,8 +18,10 @@ You can download the addon from these sites:
 ## Contributions
 
 Feel free to provide suggestions, code or pull requests.
-- Thanks very much to **rcouch00** for his ongoing interest and multiple pull requests.
+- Thanks to **rcouch00** for his ongoing interest and multiple pull requests.
 - Thanks to **Wolfyo_** for his suggestion on adding the !mount, !dismount and vendor/transmog mounting features.
+- Thanks to **HaxxenOne** for their bug report regarding non-English game clients.
+- Thanks to **Bobins666** for their bug report, testing and feedback.
 
 ## More addons
 You can find more of my addons in this repo: https://github.com/techiew/WoW-Addons
