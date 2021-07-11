@@ -7,13 +7,8 @@ This addon lets group members make you follow them when they whisper you "**!fol
 Only the person that is going to follow needs to have this addon installed, not the one whispering.
 
 ## Download
-You can download the addon from these sites:
-
+You can download the addon from CurseForge:
 [curseforge.com](https://www.curseforge.com/wow/addons/followmepls-auto-follow-addon)
-
-[wowinterface.com](https://www.wowinterface.com/downloads/info25521-FollowMePls-Auto-followaddon.html)
-
-[warcrafttavern.com](https://www.warcrafttavern.com/addons/followmepls)
 
 ## Contributions
 
@@ -22,6 +17,7 @@ Feel free to provide suggestions, code or pull requests.
 - Thanks to **Wolfyo_** for his suggestion on adding the !mount, !dismount and vendor/transmog mounting features.
 - Thanks to **HaxxenOne** for their bug report regarding non-English game clients.
 - Thanks to **Bobins666** for their bug report, testing and feedback.
+- Thanks to **derwhite** for their bug report and solution to issue #6.
 
 ## More addons
 You can find more of my addons in this repo: https://github.com/techiew/WoW-Addons
