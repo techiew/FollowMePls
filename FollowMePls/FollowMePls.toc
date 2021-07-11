@@ -1,8 +1,8 @@
-## Interface: 11304
+## Interface: 20501
 ## Title: FollowMePls
 ## Notes: Automatically follow group members who whisper you "!follow".
 ## Author: Techie
-## Version: 2.2
+## Version: 2.4
 ## SavedVariablesPerCharacter: FMP_ENABLED, FMP_GROUP_ONLY, FMP_MSG
 
 FollowMePls.lua

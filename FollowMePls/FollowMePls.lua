@@ -62,7 +62,7 @@ SlashCmdList["FMP"] = function(msg)
 		print(pre .. subj("!yak") .. sep .. desc("Makes the character summon the 'Grand Expedition Yak' mount.") .. retailOnly)
 		print(pre .. subj("!mammoth") .. sep .. desc("Makes the character summon the 'Traveler's Tundra Mammoth' mount.") .. retailOnly)
 		print(pre .. subj("!bruto") .. sep .. desc("Makes the character summon the 'Mighty Caravan Brutosaur' mount.") .. retailOnly)
-		print(pre .. subj("!dismount") .. sep .. desc("Makes the character dismount.") .. retailOnly)
+		print(pre .. subj("!dismount") .. sep .. desc("Makes the character dismount, simply '!d' works too.") .. retailOnly)
 		return
 	end
 	
@@ -99,7 +99,7 @@ SlashCmdList["FMP"] = function(msg)
 	print(pre .. subj("/fmp 1/0") .. sep .. desc("1 = Enable the addon, 0 = Disable the addon."))
 	print(pre .. subj("/fmp group 1/0") .. sep .. desc("1 = Only accept follow commands from party and raid members, 0 = Accept from anybody."))
 	print(pre .. subj("/fmp whispers") .. sep .. desc("See the list of possible whisper commands."))
-	print(pre .. subj("/fmp msg") .. sep .. desc("Disables the login message."))
+	print(pre .. subj("/fmp msg") .. sep .. desc("Toggles the login message."))
 end  
 
 -- Finds a suitable mount of the requested mountType and then summons it
@@ -124,59 +124,60 @@ local function SummonMount(mountType)
 	for key, value in pairs(mounts) do
 		local creatureName, spellID, icon, active, 
 			isUsable, sourceType, isFavorite, isFactionSpecific, 
-			faction, hideOnChar, isCollected, mountID = C_MountJournal.GetMountInfoByID(key) 
+			faction, hideOnChar, isCollected, mountID = C_MountJournal.GetMountInfoByID(value) 
 			
 		if isCollected and isUsable then 
 			local creatureDisplayInfoID, description, source, isSelfMount,
 				mountTypeID, uiModelSceneID, animID, spellVisualKitID, 
-				disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(key)
+				disablePlayerMountPreview = C_MountJournal.GetMountInfoExtraByID(value)
 			
 			if mountType == GROUND then
 			
 				if mountTypeID == 230 then
-					selectedMount = key
+					selectedMount = value
 					break
 				end
 				
 			elseif mountType == FLYING then
 				
 				if mountTypeID == 248 then
-					selectedMount = key
+					selectedMount = value
 					break
 				end
 				
 			elseif mountType == UNDERWATER then
 			
 				if mountTypeID == 231 or mountTypeID == 254 then
-					selectedMount = key
+					selectedMount = value
 					break
 				end
 			
 			elseif mountType == WATERWALK then
 			
-				if mountTypeID == 269 then
-					selectedMount = key
+				if spellID == 127271 or spellID == 118089 then -- Crimson Water Strider and Azure Water Strider
+					selectedMount = value
 					break
 				end
 			
 			elseif mountType == YAK then
 				
 				if spellID == 122708 then -- Grand Expedition Yak
-					selectedMount = key
+					selectedMount = value
 					break
 				end
 				
 			elseif mountType == MAMMOTH then
-			
-				if spellID == 61447 then -- Traveler's Tundra Mammoth
-					selectedMount = key
+				englishFaction, localizedFaction = UnitFactionGroup("player")
+				
+				if (spellID == 61425 and englishFaction == "Alliance") or (spellID == 61447 and englishFaction == "Horde") then -- Traveler's Tundra Mammoth
+					selectedMount = value
 					break
 				end
 			
 			elseif mountType == BRUTO then
 				
 				if spellID == 264058 then -- Mighty Caravan Brutosaur
-					selectedMount = key
+					selectedMount = value
 					break
 				end
 				
@@ -211,7 +212,7 @@ local function PerformCommand(cmd, playerName)
 	local commands = {
 		"!follow", "!f", "!mount", "!m",
 		"!waterwalk", "!yak", "!mammoth",
-		"!bruto", "!dismount"
+		"!bruto", "!dismount", "!d"
 	}
 	
 	local cmdExists = false
@@ -274,19 +275,14 @@ local function PerformCommand(cmd, playerName)
 		SummonMount(BRUTO)
 	end
 	
-	if cmd == "!dismount" then
+	if cmd == "!dismount" or cmd == "!d" then
 		
 		if isClassic then
 			print("This command only works in retail.")
 			return
 		end
 	
-		if IsFlying() then return end
-	
-		if IsMounted() then 
-			Dismount()
-		end
-		
+		Dismount()
 	end
 	
 end
