@@ -2,7 +2,7 @@
 ## Title: FollowMePls
 ## Notes: Automatically follow group members who whisper you "!follow".
 ## Author: Techie
-## Version: 2.4
+## Version: 3.0
 ## SavedVariablesPerCharacter: FMP_ENABLED, FMP_GROUP_ONLY, FMP_MSG
 
 FollowMePls.lua

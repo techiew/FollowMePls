@@ -5,7 +5,7 @@ SLASH_FMP2 = "/followmepls"
 local isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 local AUTO, GROUND, FLYING, UNDERWATER, WATERWALK, YAK, MAMMOTH, BRUTO = 0, 1, 2, 3, 4, 5, 6, 7
 
--- These variables and functions are used for print formatting.
+-- These variables and functions are used for print() text formatting.
 local line = "|c002F2F2A---------------------------------------------|r"
 local pre = "|c002F2F2A*|r   "
 local sep = " |c00FFFFFF-|r "
@@ -119,12 +119,15 @@ local function SummonMount(mountType)
 	end
 		
 	local mounts = C_MountJournal.GetMountIDs()
-	local selectedMount = nil
+	local suitableMounts = {}
+	local favoritedSuitableMounts = {}
 	
 	for key, value in pairs(mounts) do
 		local creatureName, spellID, icon, active, 
 			isUsable, sourceType, isFavorite, isFactionSpecific, 
 			faction, hideOnChar, isCollected, mountID = C_MountJournal.GetMountInfoByID(value) 
+			
+		local suitableMount = nil
 			
 		if isCollected and isUsable then 
 			local creatureDisplayInfoID, description, source, isSelfMount,
@@ -134,51 +137,54 @@ local function SummonMount(mountType)
 			if mountType == GROUND then
 			
 				if mountTypeID == 230 then
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 				
 			elseif mountType == FLYING then
 				
 				if mountTypeID == 248 then
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 				
 			elseif mountType == UNDERWATER then
 			
 				if mountTypeID == 231 or mountTypeID == 254 then
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 			
 			elseif mountType == WATERWALK then
 			
 				if spellID == 127271 or spellID == 118089 then -- Crimson Water Strider and Azure Water Strider
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 			
 			elseif mountType == YAK then
 				
 				if spellID == 122708 then -- Grand Expedition Yak
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 				
 			elseif mountType == MAMMOTH then
 				englishFaction, localizedFaction = UnitFactionGroup("player")
 				
 				if (spellID == 61425 and englishFaction == "Alliance") or (spellID == 61447 and englishFaction == "Horde") then -- Traveler's Tundra Mammoth
-					selectedMount = value
-					break
+					suitableMount = value
 				end
 			
 			elseif mountType == BRUTO then
 				
 				if spellID == 264058 then -- Mighty Caravan Brutosaur
-					selectedMount = value
-					break
+					suitableMount = value
+				end
+				
+			end
+			
+			if suitableMount ~= nil then
+			
+				if isFavorite then 
+					table.insert(favoritedSuitableMounts, suitableMount)
+				else
+					table.insert(suitableMounts, suitableMount)
 				end
 				
 			end
@@ -187,8 +193,11 @@ local function SummonMount(mountType)
 		
 	end
 	
-	if selectedMount == nil then
+	local numNonFavorites = table.getn(suitableMounts)
+	local numFavorites = table.getn(favoritedSuitableMounts)
 	
+	if numNonFavorites == 0 and numFavorites == 0 then
+		
 		if mountType == UNDERWATER then
 			return SummonMount(FLYING)
 		elseif mountType == FLYING then
@@ -202,7 +211,13 @@ local function SummonMount(mountType)
 		end
 		
 	else
-		C_MountJournal.SummonByID(selectedMount)
+
+		if numFavorites == 0 then
+			C_MountJournal.SummonByID(suitableMounts[math.random(1, numNonFavorites)])
+		else
+			C_MountJournal.SummonByID(favoritedSuitableMounts[math.random(1, numFavorites)])
+		end
+		
 		return true
 	end
 	
