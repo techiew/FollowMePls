@@ -57,7 +57,8 @@ SlashCmdList["FMP"] = function(msg)
 		print(line)
 		print(pre .. header("FollowMePls Whisper Commands:"))
 		print(pre .. subj("!follow") .. sep .. desc("Makes the character follow you, simply '!f' works too."))
-		print(pre .. subj("!mount") .. sep .. desc("Makes the character summon a random mount, simply '!m' works too.") .. retailOnly)
+		print(pre .. subj("!stop") .. sep .. desc("Makes the character stop following you, simply '!s' works too."))
+		print(pre .. subj("!mount") .. sep .. desc("Makes the character summon a random mount, simply '!m' works too. Favorited mounts are prioritized.") .. retailOnly)
 		print(pre .. subj("!waterwalk") .. sep .. desc("Makes the character summon a random mount that can walk on water.") .. retailOnly)
 		print(pre .. subj("!yak") .. sep .. desc("Makes the character summon the 'Grand Expedition Yak' mount.") .. retailOnly)
 		print(pre .. subj("!mammoth") .. sep .. desc("Makes the character summon the 'Traveler's Tundra Mammoth' mount.") .. retailOnly)
@@ -225,9 +226,9 @@ end
 
 local function PerformCommand(cmd, playerName)
 	local commands = {
-		"!follow", "!f", "!mount", "!m",
-		"!waterwalk", "!yak", "!mammoth",
-		"!bruto", "!dismount", "!d"
+		"!follow", "!f", "!stop", "!s",
+		"!mount", "!m", "!waterwalk", "!yak", 
+		"!mammoth", "!bruto", "!dismount", "!d"
 	}
 	
 	local cmdExists = false
@@ -268,6 +269,11 @@ local function PerformCommand(cmd, playerName)
 	if cmd == "!follow" or cmd == "!f" then
 		FollowUnit(name)
 		print("Now following " .. name .. ".")
+	end
+	
+	if cmd == "!stop" or cmd == "!s" then
+		FollowUnit("player")
+		print("Stopped following.")
 	end
 	
 	if cmd == "!mount" or cmd == "!m" then	
